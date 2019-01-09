@@ -13,10 +13,17 @@
     <h1>Patterns Index Page</h1>
 {% endblock content %}
 {% block body %}
-  <div id="summernote"><p>Hello Summernote</p></div>
+    <div class="col-md-6">
+  <form method="post">
+    <textarea id="summernote" name="editordata"></textarea>
+      <input type="submit" value="Update Content" />
+  </form>
   <script>
     $(document).ready(function() {
-        $('#summernote').summernote();
+        $('#summernote').summernote({
+        height: 300, minHeight: null, maxHeight: null, focus: true
+        });
     });
   </script>
+    </div>
 {% endblock body %}
