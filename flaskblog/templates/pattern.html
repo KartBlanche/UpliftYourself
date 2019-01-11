@@ -1,4 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Pattern Page</h1>
+        <article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title" href="{{ url_for('patterns.pattern', pattern_id=pattern.id) }}">{{ pattern.title }}</a></h2>
+            <p class="article-content">{{ pattern.content }}</p>
+          </div>
+        </article>
 {% endblock content %}

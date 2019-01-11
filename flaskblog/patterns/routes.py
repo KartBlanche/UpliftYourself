@@ -28,16 +28,16 @@ def new_pattern():  # let the user make patterns when logged in
 
 
 @patterns.route("/patterns/<int:pattern_id>")
-def pattern(pattern_id):  # make an individual page for each post, distinguished by post_id
+def pattern(pattern_id):  # make an individual page for each pattern, distinguished by post_id
     pattern = Pattern.query.get_or_404(pattern_id)
-    return render_template('pattern.html', title=pattern.title, post=pattern)
+    return render_template('pattern.html', title=pattern.title, pattern=pattern)
 
 
 @patterns.route("/patterns/<int:pattern_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_pattern(pattern_id):  # let admins update patterns
     pattern = Pattern.query.get_or_404(pattern_id)
-    if pattern.author != current_user:  # only the pattern owner can update it
+    if current_user != 4:  # only the pattern owner can update it
         abort(403)
     form = PatternForm()
     if form.validate_on_submit():  # update the pattern in the database
