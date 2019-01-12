@@ -1,8 +1,9 @@
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask import current_app
-from flaskblog import db, login_manager
-from flask_login import UserMixin
+from flask import current_app, redirect, url_for
+from flaskblog import db, login_manager, admin
+from flask_login import UserMixin, current_user
+from flask_admin.contrib.sqla import ModelView
 
 
 @login_manager.user_loader
@@ -17,6 +18,7 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
+    admin = db.Column(db.Integer, default=1)
 
     def get_reset_token(self, expires_sec=1800):  # expiration time
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
@@ -53,3 +55,10 @@ class Pattern(db.Model):
 
     def __repr__(self):
         return f"Pattern('{self.id}', '{self.title}')"
+
+
+admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(Post, db.session))
+admin.add_view(ModelView(Pattern, db.session))
+
+

@@ -37,7 +37,7 @@ def pattern(pattern_id):  # make an individual page for each pattern, distinguis
 @login_required
 def update_pattern(pattern_id):  # let admins update patterns
     pattern = Pattern.query.get_or_404(pattern_id)
-    if current_user != 4:  # only the pattern owner can update it
+    if current_user.admin != 2:  # only admins can update
         abort(403)
     form = PatternForm()
     if form.validate_on_submit():  # update the pattern in the database

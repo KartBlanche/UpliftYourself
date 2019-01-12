@@ -1,10 +1,11 @@
-from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask import render_template, url_for, flash, redirect, request, Blueprint, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from flaskblog import db, bcrypt
 from flaskblog.models import User, Post
 from flaskblog.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                    RequestResetForm, ResetPasswordForm)
 from flaskblog.users.utils import save_picture, send_reset_email
+
 
 users = Blueprint('users', __name__)
 
@@ -105,3 +106,4 @@ def reset_token(token):
         flash(f'Your password has been updated!', 'success')  # display a message for successful submit
         return redirect(url_for('users.login'))  # redirect the user after a successful submit
     return render_template('reset_token.html', title='Reset Password', form=form)
+
