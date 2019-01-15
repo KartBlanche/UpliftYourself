@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9c14527-b5af-420b-93b8-978df3cc2889" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/flaskblog/templates/pattern_section.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskblog/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskblog/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskblog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskblog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskblog/patterns/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskblog/patterns/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flaskblog/patterns/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskblog/patterns/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskblog/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/flaskblog/site.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskblog/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskblog/templates/layout.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flaskblog/templates/pattern.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskblog/templates/pattern.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskblog/templates/patterns_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskblog/templates/patterns_index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskblog/users/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskblog/users/routes.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flaskblog/patterns/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="28" column="50" lean-forward="true" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
+            <state relative-caret-position="442">
+              <caret line="44" column="41" selection-start-line="44" selection-start-column="41" selection-end-line="44" selection-end-column="41" />
               <folding>
                 <element signature="e#0#107#0" expanded="true" />
               </folding>
@@ -64,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flaskblog/templates/pattern.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+            <state relative-caret-position="102">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -118,8 +110,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flaskblog/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1041">
-              <caret line="65" column="23" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
+            <state relative-caret-position="174">
+              <caret line="53" column="65" selection-start-line="53" selection-start-column="51" selection-end-line="53" selection-end-column="65" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -197,14 +189,14 @@
         <option value="$PROJECT_DIR$/flaskblog/__init__.py" />
         <option value="$PROJECT_DIR$/flaskblog/main/routes.py" />
         <option value="$PROJECT_DIR$/flaskblog/templates/layout.html" />
-        <option value="$PROJECT_DIR$/flaskblog/models.py" />
         <option value="$PROJECT_DIR$/flaskblog/patterns/forms.py" />
         <option value="$PROJECT_DIR$/flaskblog/templates/pattern_sections.html" />
         <option value="$PROJECT_DIR$/flaskblog/templates/pattern_section.html" />
         <option value="$PROJECT_DIR$/flaskblog/users/routes.py" />
         <option value="$PROJECT_DIR$/flaskblog/templates/patterns_index.html" />
-        <option value="$PROJECT_DIR$/flaskblog/patterns/routes.py" />
         <option value="$PROJECT_DIR$/flaskblog/templates/pattern.html" />
+        <option value="$PROJECT_DIR$/flaskblog/patterns/routes.py" />
+        <option value="$PROJECT_DIR$/flaskblog/models.py" />
       </list>
     </option>
   </component>
@@ -451,7 +443,14 @@
       <option name="project" value="LOCAL" />
       <updated>1547274200267</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Collapsible Patterns page and a generated Index">
+      <created>1547516788457</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1547516788457</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -493,7 +492,8 @@
     <MESSAGE value="Adding a patterns index.&#10;&#10;And trying out Summernote." />
     <MESSAGE value="Adding patterns pages" />
     <MESSAGE value="Adding Admin page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding Admin page" />
+    <MESSAGE value="Collapsible Patterns page and a generated Index" />
+    <option name="LAST_COMMIT_MESSAGE" value="Collapsible Patterns page and a generated Index" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/GitTesting.py" />
@@ -682,16 +682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flaskblog/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1041">
-          <caret line="65" column="23" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flaskblog/posts/routes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -743,16 +733,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flaskblog/patterns/routes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="28" column="50" lean-forward="true" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#107#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flaskblog/templates/user_posts.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -762,8 +742,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flaskblog/templates/pattern.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+        <state relative-caret-position="102">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskblog/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="53" column="65" selection-start-line="53" selection-start-column="51" selection-end-line="53" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskblog/patterns/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="44" column="41" selection-start-line="44" selection-start-column="41" selection-end-line="44" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#107#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

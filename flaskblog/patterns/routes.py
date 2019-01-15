@@ -41,7 +41,7 @@ def pattern(title):
     page = request.args.get('page', 1, type=int)
     pattern = Pattern.query.filter_by(title=title).first_or_404()
     sections = Section.query.filter_by(parent_pattern=pattern)\
-        .order_by(Section.id.asc())\
+        .order_by(Section.id.asc()) \
         .paginate(page=page, per_page=10)
     return render_template('pattern.html', sections=sections, pattern=pattern)
 

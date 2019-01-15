@@ -3,11 +3,11 @@
     <h1 class="mb-3">{{ pattern.title }}</h1>
     {% for section in sections.items %}
         <p>
-          <a class="btn btn-primary" data-toggle="collapse" href="#collapse + section.id" role="button" aria-expanded="false" aria-controls="collapse + section.id">
+          <a class="btn btn-primary" data-toggle="collapse" href="#collapse{{ section.id }}" role="button" aria-expanded="false" aria-controls="collapse{{ section.id }}">
             {{ section.title }}
           </a>
         </p>
-        <div class="collapse" id="collapse + section.id">
+        <div class="collapse" id="collapse{{ section.id }}">
           <div class="card card-body">
             {{ section.content }}
           </div>
