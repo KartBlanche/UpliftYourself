@@ -2,8 +2,8 @@ from flask import (render_template, url_for, flash,
                    redirect, request, abort, Blueprint)
 from flask_login import current_user, login_required
 from flaskblog import db
-from flaskblog.models import Pattern
-from flaskblog.patterns.forms import PatternForm
+from flaskblog.models import Pattern, Section
+from flaskblog.patterns.forms import PatternForm, SectionForm
 
 patterns = Blueprint('patterns', __name__)
 
@@ -11,7 +11,10 @@ patterns = Blueprint('patterns', __name__)
 @patterns.route("/patterns/index")
 @patterns.route("/patterns")
 def index():
-    return render_template('patterns_index.html', title='Patterns Index')
+    page = request.args.get('page', 1, type=int)
+    patterns_list = Pattern.query.order_by(Pattern.id.asc())\
+        .paginate(page=page, per_page=10)
+    return render_template('patterns_index.html', patterns_list=patterns_list)
 
 
 @patterns.route("/patterns/new", methods=['GET', 'POST'])
@@ -19,7 +22,7 @@ def index():
 def new_pattern():  # let the user make patterns when logged in
     form = PatternForm()
     if form.validate_on_submit():
-        pattern = Pattern(title=form.title.data, content=form.content.data)
+        pattern = Pattern(title=form.title.data)
         db.session.add(pattern)
         db.session.commit()
         flash('Your pattern has been created!', 'success')
@@ -27,38 +30,37 @@ def new_pattern():  # let the user make patterns when logged in
     return render_template('create_post.html', title='New Pattern', form=form, legend='New Pattern')
 
 
-@patterns.route("/patterns/<int:pattern_id>")
-def pattern(pattern_id):  # make an individual page for each pattern, distinguished by post_id
-    pattern = Pattern.query.get_or_404(pattern_id)
-    return render_template('pattern.html', title=pattern.title, pattern=pattern)
+@patterns.route("/patterns/<int:section_id>")
+def section(section_id):  # make an individual page for each section, distinguished by section_id
+    section = Section.query.get_or_404(section_id)
+    return render_template('pattern_section.html', title=section.title, section=section)
 
 
-@patterns.route("/patterns/<int:pattern_id>/update", methods=['GET', 'POST'])
+@patterns.route("/patterns/<string:title>")
+def pattern(title):
+    page = request.args.get('page', 1, type=int)
+    pattern = Pattern.query.filter_by(title=title).first_or_404()
+    sections = Section.query.filter_by(parent_pattern=pattern)\
+        .order_by(Section.id.asc())\
+        .paginate(page=page, per_page=10)
+    return render_template('pattern.html', sections=sections, pattern=pattern)
+
+
+@patterns.route("/patterns/<int:section_id>/update", methods=['GET', 'POST'])
 @login_required
-def update_pattern(pattern_id):  # let admins update patterns
-    pattern = Pattern.query.get_or_404(pattern_id)
-    if current_user.admin != 2:  # only admins can update
+def update_section(section_id):  # let admins update pattern sections
+    section = Section.query.get_or_404(section_id)
+    if current_user.role != 'admin':  # only admins can update
         abort(403)
-    form = PatternForm()
-    if form.validate_on_submit():  # update the pattern in the database
-        pattern.title = form.title.data
-        pattern.content = form.content.data
+    form = SectionForm()
+    if form.validate_on_submit():  # update the pattern section in the database
+        section.title = form.title.data
+        section.content = form.content.data
         db.session.commit()
-        flash('Your pattern has been updated!', 'success')
-        return redirect(url_for('patterns.pattern', pattern_id=pattern.id))
-    elif request.method == 'GET':  # auto populate forms with the existing pattern info
-        form.title.data = pattern.title
-        form.content.data = pattern.content
-    return render_template('create_post.html', title='Update Pattern', form=form, legend='Update Pattern')
+        flash('Your pattern section has been updated!', 'success')
+        return redirect(url_for('patterns.index', section_id=section.id))
+    elif request.method == 'GET':  # auto populate forms with the existing pattern section info
+        form.title.data = section.title
+        form.content.data = section.content
+    return render_template('create_post.html', title='Update Pattern Section', form=form, legend='Update Section')
 
-
-@patterns.route("/patterns/<int:pattern_id>/delete", methods=['POST'])
-@login_required
-def delete_pattern(pattern_id):  # let users delete their patterns
-    pattern = Pattern.query.get_or_404(pattern_id)
-    if pattern.author != current_user:  # only the pattern owner can delete it
-        abort(403)
-    db.session.delete(pattern)
-    db.session.commit()
-    flash('Your pattern has been deleted.', 'success')
-    return redirect(url_for('patterns.index'))

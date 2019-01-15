@@ -1,8 +1,8 @@
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask import current_app, redirect, url_for
+from flask import current_app
 from flaskblog import db, login_manager, admin
-from flask_login import UserMixin, current_user
+from flask_login import UserMixin
 from flask_admin.contrib.sqla import ModelView
 
 
@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
-    admin = db.Column(db.Integer, default=1)
+    role = db.Column(db.String(20), default='user')
 
     def get_reset_token(self, expires_sec=1800):  # expiration time
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
@@ -50,11 +50,21 @@ class Post(db.Model):
 
 class Pattern(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.Text, nullable=False)
+    title = db.Column(db.String(100), unique=True, nullable=False)
+    sections = db.relationship('Section', backref='parent_pattern', lazy=True)
 
     def __repr__(self):
         return f"Pattern('{self.id}', '{self.title}')"
+
+
+class Section(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    pattern_id = db.Column(db.Integer, db.ForeignKey('pattern.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Section('{self.id}', '{self.title}')"
 
 
 admin.add_view(ModelView(User, db.session))

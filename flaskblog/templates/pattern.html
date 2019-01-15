@@ -1,13 +1,38 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div>
-        <h3>Admin eyes only:</h3>
-        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('patterns.update_pattern', pattern_id=pattern.id) }}">Update</a>
-    </div>
-    <article class="media content-section">
-        <div class="media-body">
-            <h2><a class="article-title" href="{{ url_for('patterns.pattern', pattern_id=pattern.id) }}">{{ pattern.title }}</a></h2>
-            <p class="article-content">{{ pattern.content }}</p>
+    <h1 class="mb-3">{{ pattern.title }}</h1>
+    {% for section in sections.items %}
+        <p>
+          <a class="btn btn-primary" data-toggle="collapse" href="#collapse + section.id" role="button" aria-expanded="false" aria-controls="collapse + section.id">
+            {{ section.title }}
+          </a>
+        </p>
+        <div class="collapse" id="collapse + section.id">
+          <div class="card card-body">
+            {{ section.content }}
+          </div>
         </div>
-    </article>
+<!--<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse + section.id" aria-expanded="true" aria-controls="collapse + section.id">
+          {{ section.title }}
+        </button>
+      </h5>
+    </div>
+    <div id="collapse + section.id" class="collapse show" aria-labelledby="heading + section.id" data-parent="#accordionExample">
+      <div class="card-body">
+        {{ section.content }}
+      </div>
+    </div>
+  </div>
+</div>
+        <article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title" href="{{ url_for('patterns.section', section_id=section.id) }}">{{ section.title }}</a></h2>
+            <p class="article-content">{{ section.content }}</p>
+          </div>
+        </article>-->
+    {% endfor %}
 {% endblock content %}
