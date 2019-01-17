@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
 {% for pattern in patterns_list.items %}
+<p>
 <h2><a class="article-title" href="{{ url_for('patterns.pattern', title=pattern.title) }}">{{ pattern.title }}</a></h2>
+</p>
 {% endfor %}
 {% endblock content %}

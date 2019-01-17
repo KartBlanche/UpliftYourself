@@ -6,33 +6,34 @@
           <a class="btn btn-primary" data-toggle="collapse" href="#collapse{{ section.id }}" role="button" aria-expanded="false" aria-controls="collapse{{ section.id }}">
             {{ section.title }}
           </a>
+            {% if current_user.role == 'admin' %}
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('patterns.update_section', section_id=section.id) }}">Update</a>
+                    <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+            {% endif %}
         </p>
         <div class="collapse" id="collapse{{ section.id }}">
           <div class="card card-body">
             {{ section.content }}
           </div>
         </div>
-<!--<div class="accordion" id="accordionExample">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse + section.id" aria-expanded="true" aria-controls="collapse + section.id">
-          {{ section.title }}
-        </button>
-      </h5>
-    </div>
-    <div id="collapse + section.id" class="collapse show" aria-labelledby="heading + section.id" data-parent="#accordionExample">
-      <div class="card-body">
-        {{ section.content }}
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete Section?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <form action="{{ url_for('patterns.delete_section', section_id=section.id) }}" method="POST">
+                <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-        <article class="media content-section">
-          <div class="media-body">
-            <h2><a class="article-title" href="{{ url_for('patterns.section', section_id=section.id) }}">{{ section.title }}</a></h2>
-            <p class="article-content">{{ section.content }}</p>
-          </div>
-        </article>-->
     {% endfor %}
 {% endblock content %}

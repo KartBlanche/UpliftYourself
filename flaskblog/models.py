@@ -51,6 +51,7 @@ class Post(db.Model):
 class Pattern(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), unique=True, nullable=False)
+    content = db.Column(db.Text)
     sections = db.relationship('Section', backref='parent_pattern', lazy=True)
 
     def __repr__(self):
