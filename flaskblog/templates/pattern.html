@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1 class="mb-3">{{ pattern.title }}</h1>
+    <p class="article-content">{{ pattern.content }}</p>
     {% for section in sections.items %}
         <p>
           <a class="btn btn-primary" data-toggle="collapse" href="#collapse{{ section.id }}" role="button" aria-expanded="false" aria-controls="collapse{{ section.id }}">
@@ -37,6 +38,6 @@
     </div>
     {% endfor %}
         {% if current_user.role == 'admin' %}
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('patterns.new_section', title=title) }}">New Section</a>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('patterns.new_section', title=pattern.title) }}">New Section</a>
         {% endif %}
 {% endblock content %}

@@ -58,16 +58,16 @@ def pattern(title):
     sections = Section.query.filter_by(parent_pattern=pattern) \
         .order_by(Section.id.asc()) \
         .paginate(page=page, per_page=10)
-    return render_template('pattern.html', sections=sections, pattern=pattern)
+    return render_template('pattern.html', sections=sections, pattern=pattern, title=title)
 
 
 @patterns.route("/patterns/<string:title>/<int:section_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_section(title, section_id):  # let admins update pattern sections
-    pattern = Pattern.query.get_or_404(title)
-    section = Section.query.get_or_404(section_id)
     if current_user.role != 'admin':  # only admins can update
         abort(403)
+    pattern = Pattern.query.get_or_404(title)
+    section = Section.query.get_or_404(section_id)
     form = SectionForm()
     if form.validate_on_submit():  # update the pattern section in the database
         section.title = form.title.data
