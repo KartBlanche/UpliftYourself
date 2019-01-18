@@ -1,8 +1,34 @@
 {% extends "layout.html" %}
 {% block content %}
 {% for pattern in patterns_list.items %}
-<p>
-<h2><a class="article-title" href="{{ url_for('patterns.pattern', title=pattern.title) }}">{{ pattern.title }}</a></h2>
-</p>
+    <p><h2>
+        <a class="article-title" href="{{ url_for('patterns.pattern', title=pattern.title) }}">{{ pattern.title }}</a>
+        {% if current_user.role == 'admin' %}
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('patterns.update_pattern', title=pattern.title) }}">Update</a>
+            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        {% endif %}
+    </h2></p>
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete Pattern and all Sections within?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <form action="{{ url_for('patterns.delete_pattern', title=pattern.title) }}" method="POST">
+                <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 {% endfor %}
+        {% if current_user.role == 'admin' %}
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('patterns.new_pattern') }}">New Pattern</a>
+        {% endif %}
 {% endblock content %}

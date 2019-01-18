@@ -49,8 +49,8 @@ class Post(db.Model):
 
 
 class Pattern(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), unique=True, nullable=False)
+    id = db.Column(db.Integer, unique=True, nullable=False)
+    title = db.Column(db.String(100), primary_key=True, unique=True, nullable=False)
     content = db.Column(db.Text)
     sections = db.relationship('Section', backref='parent_pattern', lazy=True)
 
@@ -62,7 +62,7 @@ class Section(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
-    pattern_id = db.Column(db.Integer, db.ForeignKey('pattern.id'), nullable=False)
+    pattern_title = db.Column(db.Integer, db.ForeignKey('pattern.title'), nullable=False)
 
     def __repr__(self):
         return f"Section('{self.id}', '{self.title}')"
