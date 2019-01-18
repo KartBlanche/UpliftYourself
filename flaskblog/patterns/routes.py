@@ -63,7 +63,8 @@ def pattern(title):
 
 @patterns.route("/patterns/<string:title>/<int:section_id>/update", methods=['GET', 'POST'])
 @login_required
-def update_section(section_id):  # let admins update pattern sections
+def update_section(title, section_id):  # let admins update pattern sections
+    pattern = Pattern.query.get_or_404(title)
     section = Section.query.get_or_404(section_id)
     if current_user.role != 'admin':  # only admins can update
         abort(403)
