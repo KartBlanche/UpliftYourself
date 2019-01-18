@@ -41,7 +41,7 @@ def new_section(title):  # let the user make patterns when logged in
         db.session.add(section)
         db.session.commit()
         flash('Your pattern section has been created!', 'success')
-        return redirect(url_for('patterns.index'))
+        return redirect(url_for('patterns.pattern', title=title))
     return render_template('create_post.html', title='New Section', form=form, legend='New Section')
 
 
@@ -66,7 +66,6 @@ def pattern(title):
 def update_section(title, section_id):  # let admins update pattern sections
     if current_user.role != 'admin':  # only admins can update
         abort(403)
-    pattern = Pattern.query.get_or_404(title)
     section = Section.query.get_or_404(section_id)
     form = SectionForm()
     if form.validate_on_submit():  # update the pattern section in the database
@@ -74,7 +73,7 @@ def update_section(title, section_id):  # let admins update pattern sections
         section.content = form.content.data
         db.session.commit()
         flash('Your pattern section has been updated!', 'success')
-        return redirect(url_for('patterns.index', title=pattern.title, section_id=section.id))
+        return redirect(url_for('patterns.pattern', title=title, section_id=section.id))
     elif request.method == 'GET':  # auto populate forms with the existing pattern section info
         form.title.data = section.title
         form.content.data = section.content
@@ -102,16 +101,16 @@ def update_pattern(title):  # let admins update pattern sections
     return render_template('create_pattern.html', title='Update Pattern', form=form, legend='Update Pattern')
 
 
-@patterns.route("/patterns/sections/<int:section_id>/delete", methods=['POST'])
+@patterns.route("/patterns/<string:title>/<int:section_id>/delete", methods=['POST'])
 @login_required
-def delete_section(section_id):  # let users delete their posts
+def delete_section(title, section_id):  # let users delete their posts
     section = Section.query.get_or_404(section_id)
     if current_user.role != 'admin':  # only the post owner can delete it
         abort(403)
     db.session.delete(section)
     db.session.commit()
     flash('Your pattern section has been deleted.', 'success')
-    return redirect(url_for('patterns.index'))
+    return redirect(url_for('patterns.pattern', title=title))
 
 
 @patterns.route("/patterns/<string:title>/delete", methods=['POST'])

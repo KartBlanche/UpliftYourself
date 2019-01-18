@@ -9,7 +9,7 @@
           </a>
             {% if current_user.role == 'admin' %}
                     <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('patterns.update_section', title=pattern.title, section_id=section.id) }}">Update</a>
-                    <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                    <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#delete{{ section.id }}">Delete</button>
             {% endif %}
         </p>
         <div class="collapse" id="collapse{{ section.id }}">
@@ -18,18 +18,18 @@
           </div>
         </div>
     <!-- Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal fade" id="delete{{ section.id }}" tabindex="-1" role="dialog" aria-labelledby="delete{{ section.id }}Label" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel">Delete Section?</h5>
+            <h5 class="modal-title" id="delete{{ section.id }}Label">Delete Section?</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <form action="{{ url_for('patterns.delete_section', section_id=section.id) }}" method="POST">
+            <form action="{{ url_for('patterns.delete_section', title=title, section_id=section.id) }}" method="POST">
                 <input class="btn btn-danger" type="submit" value="Delete">
             </form>
           </div>
@@ -38,6 +38,6 @@
     </div>
     {% endfor %}
         {% if current_user.role == 'admin' %}
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('patterns.new_section', title=pattern.title) }}">New Section</a>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('patterns.new_section', title=title) }}">New Section</a>
         {% endif %}
 {% endblock content %}
